@@ -1,5 +1,6 @@
-EasyGlobalizeAccessors
-======================
+= EasyGlobalizeAccessors
+
+== Introduction
 
 Generator of easy accessor methods for models using Globalize2.
 
@@ -7,22 +8,26 @@ Use globalize_accessors with list of translated fields you want easy access to a
 
 This way a single form can be used to edit given model fields with all anticipated translations.
 
-Example
-=======
+
+== Installation
+
+  script/plugin install git://github.com/tomash/easy_globalize2_accessors.git
+
+== Example
 
 Definition like this:
 
-class Product
-  translates :title, :description
-  globalize_accessors :title, :description, :locales => [:pl, :en, :de]
-end
+  class Product
+    translates :title, :description
+    globalize_accessors :title, :description, :locales => [:pl, :en, :de]
+  end
 
 Gives you access to methods: title_pl, title_en, title_de, title_pl=, title_en=, title_de= (and similar set of description_* methods). And they work seamlessly with Globalize2 (not even touching the "core" title, title= methods used by Globalize2 itself).
 
-TODO
-=======
+== TODO
 
-Make it work with full-blown locales including dash character (minus sign) like en-US, en-GB, pl-PL etc.
+* Make it work with full-blown locales including dash character (minus sign) like en-US, en-GB, pl-PL etc.
 
+== blah blah
 
 Copyright (c) 2009 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu), released under the MIT license
