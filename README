@@ -5,6 +5,8 @@ Generator of easy accessor methods for models using Globalize2.
 
 Use globalize_accessors with list of translated fields you want easy access to and extra :locales array listing locales for which you want the accessors to be generated.
 
+This way a single form can be used to edit given model fields with all anticipated translations.
+
 Example
 =======
 
