@@ -3,7 +3,7 @@ module ActiveRecord
     def self.included(base)
       base.extend ActMethods
     end
-
+    
     module ActMethods
       def globalize_accessors(*attr_names)
         languages = attr_names
@@ -19,8 +19,8 @@ module ActiveRecord
               self[attr_name] = val
             end
           end
-        end
-
+        end  
+      end
     end
   end
 end
