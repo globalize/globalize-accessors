@@ -15,7 +15,7 @@ module ActiveRecord
             end
 
             define_method :"#{attr_name}_#{with_locale}=" do |val|
-              globalize.stash with_locale, attr_name, val
+              globalize.stash.write with_locale, attr_name, val
               self[attr_name] = val
             end
           end
