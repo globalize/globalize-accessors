@@ -11,7 +11,7 @@ This way a single form can be used to edit given model fields with all anticipat
 
 == Installation
 
-  script/plugin install git://github.com/astropanic/easy_globalize2_accessors.git
+  script/plugin install git://github.com/tomash/easy_globalize2_accessors.git
 
 == Example
 
@@ -30,4 +30,4 @@ Gives you access to methods: title_pl, title_en, title_de, title_pl=, title_en=,
 
 == blah blah
 
-Copyright (c) 2009 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu), released under the MIT license
+Copyright (c) 2009-2010 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu), released under the MIT license
