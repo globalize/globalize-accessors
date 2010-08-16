@@ -1,1 +1,1 @@
-ActiveRecord::Base.send :include, ActiveRecord::GlobalizeAccessors
+ActiveRecord::Base.extend(ActiveRecord::GlobalizeAccessors)
