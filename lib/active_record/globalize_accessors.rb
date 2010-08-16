@@ -1,10 +1,5 @@
 module ActiveRecord
   module GlobalizeAccessors
-    def self.included(base)
-      base.extend ActMethods
-    end
-    
-    module ActMethods
       def globalize_accessors(*attr_names)
         languages = attr_names
         attribs = translated_attribute_names
@@ -31,8 +26,7 @@ module ActiveRecord
           @temp_attributes = Hash[*languages.collect { |v| [v, {}]}.flatten]
         end
         
-        after_save :initialize_temp_attributes 
-      end
+        after_save :initialize_temp_attributes
     end
   end
 end
