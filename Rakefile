@@ -1,3 +1,8 @@
+require 'bundler'
+#Bundler.require
+#require 'rake'
+Bundler::GemHelper.install_tasks
+
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
