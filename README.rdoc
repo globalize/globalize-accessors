@@ -1,8 +1,8 @@
-= EasyGlobalizeAccessors
+= EasyGlobalize3Accessors
 
 == Introduction
 
-Generator of easy accessor methods for models using Globalize2.
+Generator of easy accessor methods for models using Globalize3.
 
 Use globalize_accessors with list of translated fields you want easy access to and extra :locales array listing locales for which you want the accessors to be generated.
 
@@ -11,7 +11,7 @@ This way a single form can be used to edit given model fields with all anticipat
 
 == Installation
 
-  script/plugin install git://github.com/tomash/easy_globalize2_accessors.git
+  gem install easy_globalize3_accessors
 
 == Example
 
@@ -19,14 +19,32 @@ Definition like this:
 
   class Product
     translates :title, :description
-    globalize_accessors :pl, :en, :de
+    globalize_accessors :locales => [:en, :pl], :attributes => [:title]
   end
 
-Gives you access to methods: title_pl, title_en, title_de, title_pl=, title_en=, title_de= (and similar set of description_* methods). And they work seamlessly with Globalize2 (not even touching the "core" title, title= methods used by Globalize2 itself).
+Gives you access to methods: title_pl, title_en, title_pl=, title_en= (and similar set of description_* methods). And they work seamlessly with Globalize3 (not even touching the "core" title, title= methods used by Globalize3 itself).
 
-== TODO
+:locales and :attributes are optional. Default values are:
+  :locales => I18n.available_locales
+  :attributes => translated_attribute_names
 
-* Make it work with full-blown locales including dash character (minus sign) like en-US, en-GB, pl-PL etc.
+which means that skipping all options will generate you accessor method for all translated fields and available languages
+
+== Always define accessors
+
+If you wish to always define accessors and don't want to write globalize_accessors in every class, you can extend ActiveRecord::Base with such module:
+
+  module TranslatesWithAccessors
+
+    def translates(*params)
+      options = params.extract_options!
+      options.reverse_merge!(:globalize_accessors => true)
+      accessors = options.delete(:globalize_accessors)
+      super
+      globalize_accessors if accessors
+    end
+
+  end
 
 == blah blah
 

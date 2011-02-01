@@ -4,9 +4,9 @@ require 'globalize3'
 module EasyGlobalize3Accessors
 
   def globalize_accessors(options = {})
-    options.reverse_merge!(:languages => I18n.available_locales, :attributes => translated_attribute_names)
+    options.reverse_merge!(:locales => I18n.available_locales, :attributes => translated_attribute_names)
 
-    each_attribute_and_language(options) do |attr_name, locale|
+    each_attribute_and_locale(options) do |attr_name, locale|
       define_accessors(attr_name, locale)
     end
   end
@@ -33,9 +33,9 @@ module EasyGlobalize3Accessors
     end
   end
 
-  def each_attribute_and_language(options)
+  def each_attribute_and_locale(options)
     options[:attributes].each do |attr_name|
-      options[:languages].each do |locale|
+      options[:locales].each do |locale|
         yield attr_name, locale
       end
     end
