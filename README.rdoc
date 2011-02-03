@@ -4,7 +4,7 @@
 
 Generator of easy accessor methods for models using Globalize3.
 
-Use globalize_accessors with list of translated fields you want easy access to and extra :locales array listing locales for which you want the accessors to be generated.
+Use globalize_accessors with list of translated fields you want easily access to and extra :locales array listing locales for which you want the accessors to be generated.
 
 This way a single form can be used to edit given model fields with all anticipated translations.
 
@@ -32,7 +32,7 @@ which means that skipping all options will generate you accessor method for all 
 
 == Always define accessors
 
-If you wish to always define accessors and don't want to write globalize_accessors in every class, you can extend ActiveRecord::Base with such module:
+If you wish to always define accessors and don't want to call globalize_accessors method in every class, you can extend ActiveRecord::Base with such module:
 
   module TranslatesWithAccessors
 
@@ -46,6 +46,6 @@ If you wish to always define accessors and don't want to write globalize_accesso
 
   end
 
-== blah blah
+== Licence
 
-Copyright (c) 2009-2010 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu), released under the MIT license
+Copyright (c) 2009-2010 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu),  Robert Pankowecki (http://robert.pankowecki.pl) released under the MIT license
