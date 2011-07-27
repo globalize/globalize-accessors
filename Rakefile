@@ -1,11 +1,14 @@
-require 'bundler'
-#Bundler.require
-#require 'rake'
-Bundler::GemHelper.install_tasks
+#!/usr/bin/env rake
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
 
-require 'rake'
+Bundler::GemHelper.install_tasks
+require 'rdoc/task'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rake'
 
 desc 'Default: run unit tests.'
 task :default => :test
