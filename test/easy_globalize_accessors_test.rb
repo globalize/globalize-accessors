@@ -7,6 +7,12 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors
   end
 
+  class UnitTranslatedWithOptions < ActiveRecord::Base
+    set_table_name :units
+    translates :name
+    globalize_accessors :locales => [:pl], :attributes => [:name]
+  end
+
   setup do
     assert_equal :en, I18n.locale
   end
@@ -59,6 +65,22 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal "Title pl",  u.title_pl
     
     assert_nil u.title_en
+  end
+
+  test "read and write on class with options" do
+    u = UnitTranslatedWithOptions.new()
+
+    assert u.respond_to?(:name_pl)
+    assert u.respond_to?(:name_pl=)
+
+    assert ! u.respond_to?(:name_en)
+    assert ! u.respond_to?(:name_en=)
+
+    u.name = "Name en"
+    u.name_pl = "Name pl"
+
+    assert_equal "Name en",  u.name
+    assert_equal "Name pl",  u.name_pl
   end
   
 end
