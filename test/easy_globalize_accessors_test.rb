@@ -8,7 +8,7 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
   end
 
   class UnitTranslatedWithOptions < ActiveRecord::Base
-    set_table_name :units
+    self.table_name = :units
     translates :name
     globalize_accessors :locales => [:pl], :attributes => [:name]
   end

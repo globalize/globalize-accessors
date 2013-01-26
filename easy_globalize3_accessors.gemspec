@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "easy_globalize3_accessors"
 
-  s.add_dependency "globalize3", "~> 0.2.0.beta1"
+  s.add_dependency "globalize3", "~> 0.3.0"
 
   s.add_development_dependency "bundler", "~> 1.0.15"
   s.add_development_dependency "rake", "~> 0.9.2"
