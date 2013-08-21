@@ -100,4 +100,11 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_nil  u.title_pl
   end
 
+  test "globalize locales on class without locales specified in options" do
+    assert_equal [:en, :pl], Unit.globalize_locales
+  end
+
+  test "globalize locales on class with locales specified in options" do
+    assert_equal [:pl], UnitTranslatedWithOptions.globalize_locales
+  end
 end

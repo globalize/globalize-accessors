@@ -1,9 +1,11 @@
 require 'globalize3'
 
 module EasyGlobalize3Accessors
+  attr_reader :globalize_locales
 
   def globalize_accessors(options = {})
     options.reverse_merge!(:locales => I18n.available_locales, :attributes => translated_attribute_names)
+    @globalize_locales = options[:locales]
 
     each_attribute_and_locale(options) do |attr_name, locale|
       define_accessors(attr_name, locale)
