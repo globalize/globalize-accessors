@@ -28,7 +28,10 @@ Gives you access to methods: title_pl, title_en, title_pl=, title_en= (and simil
   :locales => I18n.available_locales
   :attributes => translated_attribute_names
 
-which means that skipping all options will generate you accessor method for all translated fields and available languages
+which means that skipping all options will generate you accessor method for all translated fields and available languages.
+
+You can also get locales for class with "globalize_locales" method:
+  Product.globalize_locales # => [:en, :pl]
 
 == Always define accessors
 
