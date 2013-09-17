@@ -20,6 +20,12 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors
   end
 
+  class UnitWithDashedLocales < ActiveRecord::Base
+    self.table_name = :units
+    translates :name
+    globalize_accessors :locales => [:"pt-BR", :"en-AU"], :attributes => [:name]
+  end
+
   setup do
     assert_equal :en, I18n.locale
   end
@@ -106,5 +112,23 @@ class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
 
   test "globalize locales on class with locales specified in options" do
     assert_equal [:pl], UnitTranslatedWithOptions.globalize_locales
+  end
+
+  test "read and write on class with dashed locales" do
+    u = UnitWithDashedLocales.new()
+
+    assert u.respond_to?(:name_pt_br)
+    assert u.respond_to?(:name_pt_br=)
+
+    assert u.respond_to?(:name_en_au)
+    assert u.respond_to?(:name_en_au=)
+
+    u.name = "Name en"
+    u.name_pt_br = "Name pt-BR"
+    u.name_en_au = "Name en-AU"
+
+    assert_equal "Name en",  u.name
+    assert_equal "Name pt-BR",  u.name_pt_br
+    assert_equal "Name en-AU",  u.name_en_au
   end
 end
