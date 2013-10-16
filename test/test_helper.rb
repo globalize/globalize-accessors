@@ -6,7 +6,7 @@ require 'active_support'
 require 'active_support/test_case'
 require 'logger'
 
-require 'easy_globalize3_accessors' # => globalize3 => active_record
+require 'globalize-accessors'
 
 plugin_test_dir = File.dirname(__FILE__)
 

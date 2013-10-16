@@ -1,6 +1,6 @@
 require 'globalize3'
 
-module EasyGlobalize3Accessors
+module GlobalizeAccessors
   attr_reader :globalize_locales
 
   def globalize_accessors(options = {})
@@ -47,4 +47,4 @@ module EasyGlobalize3Accessors
 
 end
 
-ActiveRecord::Base.extend EasyGlobalize3Accessors
+ActiveRecord::Base.extend GlobalizeAccessors

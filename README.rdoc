@@ -2,9 +2,11 @@
 
 == Introduction
 
-Generator of easy accessor methods for models using Globalize. Use globalize_accessors with a list of translated fields you want easily access to and extra :locales array listing locales for which you want the accessors to be generated.
+Generator of accessor methods for models using Globalize. Use globalize-accessors with a list of translated fields you want easily access to and extra :locales array listing locales for which you want the accessors to be generated.
 
 This way a single form can be used to edit given model fields with all anticipated translations.
+
+Note that globalize-accessors is currently only compatible with the globalize3 gem for Rails 3.x.
 
 
 == Installation

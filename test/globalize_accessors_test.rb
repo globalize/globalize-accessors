@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EasyGlobalizeAccessorsTest < ActiveSupport::TestCase
+class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
   class Unit < ActiveRecord::Base
     translates :name, :title
