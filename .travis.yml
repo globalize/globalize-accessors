@@ -1,4 +1,6 @@
 language: ruby
+before_script:
+  - "cp test/db/database.yml.travis test/db/database.yml"
 script: "bundle exec rake"
 env:
   - RAILS_3=true

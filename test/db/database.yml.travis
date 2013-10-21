@@ -1,0 +1,21 @@
+sqlite3:
+  adapter: sqlite3
+  dbfile: globalize.sqlite3
+  database: globalize.sqlite3
+sqlite3mem:
+  adapter: sqlite3
+  dbfile: ":memory:"
+  database: globalize.sqlite3
+postgresql:
+  adapter: postgresql
+  username: postgres
+  password: postgres
+  database: globalize
+  min_messages: ERROR
+mysql:
+  adapter: mysql
+  host: localhost
+  username: root
+  password:
+  database: globalize
+
