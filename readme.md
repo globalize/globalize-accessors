@@ -6,7 +6,7 @@ Generator of accessor methods for models using Globalize. Use globalize-accessor
 
 This way a single form can be used to edit given model fields with all anticipated translations.
 
-Note that globalize-accessors is currently only compatible with the globalize3 gem for Rails 3.x.
+`globalize-accessors` is compatible with both Rails 3.x and Rails 4.
 
 
 ## Installation
