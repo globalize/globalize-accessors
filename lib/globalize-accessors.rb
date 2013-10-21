@@ -1,4 +1,4 @@
-require 'globalize3'
+require 'globalize'
 
 module GlobalizeAccessors
   attr_reader :globalize_locales
@@ -31,9 +31,6 @@ module GlobalizeAccessors
   def define_setter(attr_name, locale)
     define_method :"#{attr_name}_#{locale.to_s.underscore}=" do |value|
       write_attribute(attr_name, value, :locale => locale)
-    end
-    if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
-      attr_accessible :"#{attr_name}_#{locale.to_s.underscore}"
     end
   end
 
