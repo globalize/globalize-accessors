@@ -13,6 +13,13 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:pl], :attributes => [:name]
   end
 
+  class UnitWithAttrAccessible < ActiveRecord::Base
+    self.table_name = :units
+    attr_accessible :name
+    translates :name, :title
+    globalize_accessors
+  end
+
   class UnitWithDashedLocales < ActiveRecord::Base
     self.table_name = :units
     translates :name
@@ -87,6 +94,16 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
     assert_equal "Name en",  u.name
     assert_equal "Name pl",  u.name_pl
+  end
+
+  test "whitelist locale accessors if the original attribute is whitelisted" do
+    u = UnitWithAttrAccessible.new()
+    u.update_attributes(:name => "Name en", :name_pl => "Name pl", :title => "Title en", :title_pl => "Title pl")
+
+    assert_equal "Name en",  u.name
+    assert_equal "Name pl",  u.name_pl
+    assert_nil  u.title
+    assert_nil  u.title_pl
   end
 
   test "globalize locales on class without locales specified in options" do
