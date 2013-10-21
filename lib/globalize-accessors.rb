@@ -32,9 +32,6 @@ module GlobalizeAccessors
     define_method :"#{attr_name}_#{locale.to_s.underscore}=" do |value|
       write_attribute(attr_name, value, :locale => locale)
     end
-    if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
-      attr_accessible :"#{attr_name}_#{locale.to_s.underscore}"
-    end
   end
 
   def each_attribute_and_locale(options)
