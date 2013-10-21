@@ -1,4 +1,4 @@
-require 'globalize3'
+require 'globalize'
 
 module GlobalizeAccessors
   attr_reader :globalize_locales
