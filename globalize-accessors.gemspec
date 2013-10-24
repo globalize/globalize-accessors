@@ -15,9 +15,11 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "globalize-accessors"
 
   if ENV['RAILS_3']
-    s.add_dependency "globalize3", "~> 0.3.0"
-  else
+    s.add_dependency "globalize", "~> 3.0.0"
+  elsif ENV['RAILS_4']
     s.add_dependency "globalize", "~> 4.0.0.alpha.1"
+  else
+    s.add_dependency "globalize", ">= 3"
   end
 
   s.add_development_dependency "bundler", "~> 1.3.5"
