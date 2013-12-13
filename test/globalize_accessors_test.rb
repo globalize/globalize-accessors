@@ -133,4 +133,12 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal "Name pt-BR",  u.name_pt_br
     assert_equal "Name en-AU",  u.name_en_au
   end
+
+  test "globalize attribute names on class without attributes specified in options" do
+    assert_equal [:name_en, :name_pl, :title_en, :title_pl], Unit.globalize_attribute_names
+  end
+
+  test "globalize attribute names on class with attributes specified in options" do
+    assert_equal [:name_pl], UnitTranslatedWithOptions.globalize_attribute_names
+  end
 end

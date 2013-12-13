@@ -41,6 +41,25 @@ You can also get the accessor locales for a class with the `globalize_locales` m
   Product.globalize_locales # => [:en, :pl]
 ````
 
+You can also get modified attribute names - ideal to strong parameters usage - with "globalize_attribute_names" method:
+
+````ruby
+Product.globalize_attribute_names # => [:title_en, :title_pl]
+````
+
+Example usage with strong parameters:
+
+````ruby
+params.require(:product).permit(*Product.globalize_attribute_names)
+````
+
+If you need none translatable attributes as well, you could do:
+
+````ruby
+permitted = Product.globalize_attribute_names + [:position]
+params.require(:product).permit(*permitted)
+````
+
 ## Always define accessors
 
 If you wish to always define accessors and don't want to call the globalize_accessors method in every class, you can extend ActiveRecord::Base with a module:
