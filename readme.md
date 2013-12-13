@@ -1,4 +1,4 @@
-# Globalize Accessors [![Build Status](https://travis-ci.org/globalize/globalize-accessors.png)](https://travis-ci.org/globalize/globalize-accessors)
+# Globalize Accessors [![Build Status](https://travis-ci.org/globalize/globalize-accessors.png?branch=master)](https://travis-ci.org/globalize/globalize-accessors)
 
 ## Introduction
 
