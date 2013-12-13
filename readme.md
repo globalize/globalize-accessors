@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Generator of accessor methods for models using Globalize. Use globalize-accessors with a list of translated fields you want easily access to and extra :locales array listing locales for which you want the accessors to be generated.
+Generator of accessor methods for models using Globalize. Use `globalize-accessors` with a list of translated fields you want easily access to and extra `locales` array listing locales for which you want the accessors to be generated.
 
 This way a single form can be used to edit given model fields with all anticipated translations.
 
@@ -11,7 +11,9 @@ This way a single form can be used to edit given model fields with all anticipat
 
 ## Installation
 
-  gem install globalize-accessors
+````ruby
+gem install globalize-accessors
+````
 
 ## Example
 
@@ -24,36 +26,36 @@ class Product
 end
 ````
 
-Gives you access to methods: `title_pl`, `title_en`, `title_pl=`, `title_en=` (and a similar set of description_* methods). They work seamlessly with Globalize (not even touching the "core" title, title= methods used by Globalize itself).
+Gives you access to methods: `title_pl`, `title_en`, `title_pl=`, `title_en=` (and a similar set of description_* methods). These work seamlessly with Globalize (not even touching the "core" `title`, `title=` methods used by Globalize itself).
 
-`:locales` and `:attributes` are optional. Default values are:
+The `:locales` and `:attributes` options are optional. Their default values are:
 
 ````ruby
-  :locales => I18n.available_locales
-  :attributes => translated_attribute_names
+:locales => I18n.available_locales
+:attributes => translated_attribute_names
 ````
 
-which means that skipping all options will generate you accessor method for all translated fields and available languages.
+Calling `globalize_accessors` with no options will therefore generate accessor methods for all translated fields and available languages.
 
 You can also get the accessor locales for a class with the `globalize_locales` method:
 
 ````ruby
-  Product.globalize_locales # => [:en, :pl]
+Product.globalize_locales # => [:en, :pl]
 ````
 
-You can also get modified attribute names - ideal to strong parameters usage - with "globalize_attribute_names" method:
+You can also get modified attribute names -- ideal for use with strong parameters -- with the `globalize_attribute_names` method:
 
 ````ruby
 Product.globalize_attribute_names # => [:title_en, :title_pl]
 ````
 
-Example usage with strong parameters:
+Example with strong parameters:
 
 ````ruby
 params.require(:product).permit(*Product.globalize_attribute_names)
 ````
 
-If you need none translatable attributes as well, you could do:
+If you need to permit non-translatable attributes as well, you could include them with:
 
 ````ruby
 permitted = Product.globalize_attribute_names + [:position]
@@ -62,7 +64,7 @@ params.require(:product).permit(*permitted)
 
 ## Always define accessors
 
-If you wish to always define accessors and don't want to call the globalize_accessors method in every class, you can extend ActiveRecord::Base with a module:
+If you wish to always define accessors and don't want to call the `globalize_accessors` method in every class, you can extend `ActiveRecord::Base` with a module:
 
 ````ruby
 module TranslatesWithAccessors
