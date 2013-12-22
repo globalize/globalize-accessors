@@ -13,6 +13,14 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:pl], :attributes => [:name]
   end
 
+  class UnitInhterited < UnitTranslatedWithOptions
+  end
+
+  class UnitInhteritedWithOptions < ActiveRecord::Base
+    translates :color
+    globalize_accessors :locales => [:de], :attributes => [:color]
+  end
+
   class UnitWithAttrAccessible < ActiveRecord::Base
     self.table_name = :units
     attr_accessible :name if ENV['RAILS_3']
@@ -140,5 +148,15 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
   test "globalize attribute names on class with attributes specified in options" do
     assert_equal [:name_pl], UnitTranslatedWithOptions.globalize_attribute_names
+  end
+
+  test "inherit globalize locales and attributes" do
+    assert_equal [:name_pl], UnitInhterited.globalize_attribute_names
+    assert_equal [:pl], UnitInhterited.globalize_locales
+  end
+
+  test "overwrite inherited globalize locales and attributes" do
+    assert_equal [:color_de], UnitInhteritedWithOptions.globalize_attribute_names
+    assert_equal [:de], UnitInhteritedWithOptions.globalize_locales
   end
 end
