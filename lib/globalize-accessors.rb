@@ -1,13 +1,12 @@
 require 'globalize'
 
 module Globalize::Accessors
-  attr_reader :globalize_locales
-  attr_reader :globalize_attribute_names
-
   def globalize_accessors(options = {})
     options.reverse_merge!(:locales => I18n.available_locales, :attributes => translated_attribute_names)
-    @globalize_locales = options[:locales]
-    @globalize_attribute_names = []
+    class_attribute :globalize_locales, :globalize_attribute_names
+
+    self.globalize_locales = options[:locales]
+    self.globalize_attribute_names = []
 
     each_attribute_and_locale(options) do |attr_name, locale|
       define_accessors(attr_name, locale)
@@ -39,7 +38,7 @@ module Globalize::Accessors
     if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
       attr_accessible :"#{localized_attr_name}"
     end
-    @globalize_attribute_names << localized_attr_name.to_sym
+    self.globalize_attribute_names << localized_attr_name.to_sym
   end
 
   def each_attribute_and_locale(options)
