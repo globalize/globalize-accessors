@@ -159,4 +159,9 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal [:color_de], UnitInheritedWithOptions.globalize_attribute_names
     assert_equal [:de], UnitInheritedWithOptions.globalize_locales
   end
+
+  test "instance cannot set globalize locales or attributes" do
+    assert_raise(NoMethodError) { Unit.new.globalize_attribute_names = [:name] }
+    assert_raise(NoMethodError) { Unit.new.globalize_locales = [:en, :de] }
+  end
 end
