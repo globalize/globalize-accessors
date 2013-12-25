@@ -21,11 +21,13 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:de], :attributes => [:color]
   end
 
-  class UnitWithAttrAccessible < ActiveRecord::Base
-    self.table_name = :units
-    attr_accessible :name if ENV['RAILS_3']
-    translates :name, :title
-    globalize_accessors
+  if ENV['RAILS_3']
+    class UnitWithAttrAccessible < ActiveRecord::Base
+      self.table_name = :units
+      attr_accessible :name
+      translates :name, :title
+      globalize_accessors
+    end
   end
 
   class UnitWithDashedLocales < ActiveRecord::Base
