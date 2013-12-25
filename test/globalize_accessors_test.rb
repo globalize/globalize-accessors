@@ -13,10 +13,10 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:pl], :attributes => [:name]
   end
 
-  class UnitInhterited < UnitTranslatedWithOptions
+  class UnitInherited < UnitTranslatedWithOptions
   end
 
-  class UnitInhteritedWithOptions < ActiveRecord::Base
+  class UnitInheritedWithOptions < ActiveRecord::Base
     translates :color
     globalize_accessors :locales => [:de], :attributes => [:color]
   end
@@ -151,12 +151,12 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
   end
 
   test "inherit globalize locales and attributes" do
-    assert_equal [:name_pl], UnitInhterited.globalize_attribute_names
-    assert_equal [:pl], UnitInhterited.globalize_locales
+    assert_equal [:name_pl], UnitInherited.globalize_attribute_names
+    assert_equal [:pl], UnitInherited.globalize_locales
   end
 
   test "overwrite inherited globalize locales and attributes" do
-    assert_equal [:color_de], UnitInhteritedWithOptions.globalize_attribute_names
-    assert_equal [:de], UnitInhteritedWithOptions.globalize_locales
+    assert_equal [:color_de], UnitInheritedWithOptions.globalize_attribute_names
+    assert_equal [:de], UnitInheritedWithOptions.globalize_locales
   end
 end
