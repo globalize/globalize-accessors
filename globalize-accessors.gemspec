@@ -3,7 +3,7 @@ require File.expand_path("../lib/globalize-accessors/version", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "globalize-accessors"
-  s.version     = GlobalizeAccessors::VERSION
+  s.version     = Globalize::Accessors::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Tomasz Stachewicz", "Wojciech Pietrzak", "Steve Verlinden", "Robert Pankowecki", "Chris Salzberg"]
   s.email       = ["tomekrs@o2.pl", "steve.verlinden@gmail.com", "robert.pankowecki@gmail.com", "rpa@gavdi.com", "chrissalzberg@gmail.com"]
