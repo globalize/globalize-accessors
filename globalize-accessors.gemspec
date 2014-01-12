@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Define methods for accessing translated attributes"
   s.description = "Define methods for accessing translated attributes"
 
-  s.required_rubygems_version = ">= 1.3.6"
+  s.required_rubygems_version = ">= 1.3"
   s.rubyforge_project         = "globalize-accessors"
 
   if ENV['RAILS_3']
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     s.add_dependency "globalize", ">= 3"
   end
 
-  s.add_development_dependency "bundler", "~> 1.3.5"
+  s.add_development_dependency "bundler", ">= 1.3.5"
   s.add_development_dependency "rake", "~> 0.9.2"
   s.add_development_dependency "sqlite3"
 
