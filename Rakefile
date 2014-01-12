@@ -13,7 +13,7 @@ require 'rake'
 desc 'Default: run unit tests.'
 task :default => :test
 
-desc 'Test the easy_globalize_accessors plugin.'
+desc 'Test globalize-accessors gem.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
@@ -21,7 +21,7 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-desc 'Generate documentation for the easy_globalize_accessors plugin.'
+desc 'Generate documentation for globalize-accessors gem.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'EasyGlobalizeAccessors'
