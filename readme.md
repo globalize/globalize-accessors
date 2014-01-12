@@ -82,4 +82,6 @@ end
 
 ## Licence
 
-Copyright (c) 2009-2013 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu),  Robert Pankowecki (http://robert.pankowecki.pl) released under the MIT license
+Copyright (c) 2009-2013 Tomek "Tomash" Stachewicz (http://tomash.wrug.eu),
+Robert Pankowecki (http://robert.pankowecki.pl), Chris Salzberg (http://dejimata.com)
+released under the MIT license
