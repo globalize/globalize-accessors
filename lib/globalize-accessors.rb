@@ -25,7 +25,7 @@ module Globalize::Accessors
 
   def define_getter(attr_name, locale)
     define_method :"#{attr_name}_#{locale.to_s.underscore}" do
-      read_attribute(attr_name, :locale => locale)
+      globalize.stash.contains?(locale, attr_name) ? globalize.send(:fetch_stash, locale, attr_name) : globalize.send(:fetch_attribute, locale, attr_name)
     end
   end
 

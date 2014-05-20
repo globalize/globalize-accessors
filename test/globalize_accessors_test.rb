@@ -144,6 +144,17 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal "Name en-AU",  u.name_en_au
   end
 
+  test "read when fallbacks present" do
+    u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
+    u = Unit.find(u.id)
+    def u.globalize_fallbacks(locale)
+      locale == :pl ? [:pl, :en] : [:en, :pl]
+    end
+
+    assert_equal "Name en",  u.name
+    assert_nil u.title_en
+  end
+
   test "globalize attribute names on class without attributes specified in options" do
     assert_equal [:name_en, :name_pl, :title_en, :title_pl], Unit.globalize_attribute_names
   end
