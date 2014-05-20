@@ -1,7 +1,7 @@
 require 'i18n'
 I18n.available_locales = [:en, :pl]
 
-require 'test/unit'
+require 'minitest/autorun'
 require 'active_support'
 require 'active_support/test_case'
 require 'logger'
