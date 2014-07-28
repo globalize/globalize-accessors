@@ -51,6 +51,17 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_nil u.title_en
   end
 
+  test "build translations for a new object" do
+    u = Unit.new(:name_en => "Name en", :title_pl => "Title pl")
+    assert_equal 2, u.translations.size # size of the collection
+    assert_equal 0, u.translations.count # count from database
+  end
+
+  test "doesn't build translations without values" do
+    u = Unit.new(:name_en => nil, :title_pl => " ")
+    assert_equal 0, u.translations.size
+  end
+
   test "write on new object and read on saved" do
     u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
 
@@ -60,6 +71,14 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
     assert_nil u.name_pl
     assert_nil u.title_en
+  end
+
+   test "updates translations for existing object" do
+    u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
+    u.name_en = "New name en"
+    assert_equal "New name en", u.translations.find {|t| t.locale == :en }.name
+    assert_equal "Title pl", u.translations.find {|t| t.locale == :pl }.title
+    assert_equal 2, u.translations.count
   end
 
   test "read on existing object" do
