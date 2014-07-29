@@ -36,8 +36,20 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:"pt-BR", :"en-AU"], :attributes => [:name]
   end
 
+  class UnitWithoutAccessors < ActiveRecord::Base
+    self.table_name = :units
+  end
+
   setup do
     assert_equal :en, I18n.locale
+  end
+
+  test "return localized attribute names" do
+    u = UnitWithDashedLocales.new
+
+    assert_equal "name_en", u.localized_attr_name_for(:name, :en)
+    assert_equal "name_pt_br", u.localized_attr_name_for(:name, :"pt-BR")
+    assert_equal "name_zh_cn", u.class.localized_attr_name_for(:name, :"zh-CN")
   end
 
   test "read and write on new object" do
@@ -195,5 +207,9 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
   test "instance cannot set globalize locales or attributes" do
     assert_raise(NoMethodError) { Unit.new.globalize_attribute_names = [:name] }
     assert_raise(NoMethodError) { Unit.new.globalize_locales = [:en, :de] }
+  end
+
+  test "instance without accessors" do
+    refute UnitWithoutAccessors.new.respond_to?(:localized_attr_name_for)
   end
 end

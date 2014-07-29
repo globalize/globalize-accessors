@@ -11,6 +11,12 @@ module Globalize::Accessors
     each_attribute_and_locale(options) do |attr_name, locale|
       define_accessors(attr_name, locale)
     end
+
+    include InstanceMethods
+  end
+
+  def localized_attr_name_for(attr_name, locale)
+    "#{attr_name}_#{locale.to_s.underscore}"
   end
 
   private
@@ -21,13 +27,13 @@ module Globalize::Accessors
   end
 
   def define_getter(attr_name, locale)
-    define_method :"#{attr_name}_#{locale.to_s.underscore}" do
+    define_method localized_attr_name_for(attr_name, locale) do
       globalize.stash.contains?(locale, attr_name) ? globalize.send(:fetch_stash, locale, attr_name) : globalize.send(:fetch_attribute, locale, attr_name)
     end
   end
 
   def define_setter(attr_name, locale)
-    localized_attr_name = "#{attr_name}_#{locale.to_s.underscore}"
+    localized_attr_name = localized_attr_name_for(attr_name, locale)
 
     define_method :"#{localized_attr_name}=" do |value|
       write_attribute(attr_name, value, :locale => locale)
@@ -47,6 +53,11 @@ module Globalize::Accessors
     end
   end
 
+  module InstanceMethods
+    def localized_attr_name_for(attr_name, locale)
+      self.class.localized_attr_name_for(attr_name, locale)
+    end
+  end
 end
 
 ActiveRecord::Base.extend Globalize::Accessors
