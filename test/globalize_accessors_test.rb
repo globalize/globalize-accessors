@@ -74,6 +74,14 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal 0, u.translations.size
   end
 
+  test "doesn't build translations without values even after saving" do
+    u = Unit.new(:name_en => nil, :title_pl => " ")
+    u.save
+
+    # Globalize will always create an empty translation for the default locale
+    assert_equal 1, u.translations.size
+  end
+
   test "write on new object and read on saved" do
     u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
 

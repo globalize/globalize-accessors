@@ -36,8 +36,9 @@ module Globalize::Accessors
     localized_attr_name = localized_attr_name_for(attr_name, locale)
 
     define_method :"#{localized_attr_name}=" do |value|
+      return if value.blank?
       write_attribute(attr_name, value, :locale => locale)
-      translation_for(locale)[attr_name] = value if value.present?
+      translation_for(locale)[attr_name] = value
     end
     if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
       attr_accessible :"#{localized_attr_name}"
