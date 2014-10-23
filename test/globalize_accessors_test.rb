@@ -82,6 +82,19 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal 1, u.translations.size
   end
 
+  test "persisted translations can be set to empty values" do
+    u = Unit.new(:name_en => "test")
+    u.save
+    u.name_en = ""
+    assert_equal "", u.translations.first.name
+  end
+
+  test "not persisted translations can be set to empty values" do
+    u = Unit.new(:name_en => "test")
+    u.name_en = ""
+    assert_equal "", u.translations.first.name
+  end
+
   test "write on new object and read on saved" do
     u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
 
