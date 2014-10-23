@@ -78,8 +78,10 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     u = Unit.new(:name_en => nil, :title_pl => " ")
     u.save
 
-    # Globalize will always create an empty translation for the default locale
-    assert_equal 1, u.translations.size
+    # On Rails 4, Globalize will always create an empty translation for
+    # the default locale
+    # On Rails 3, Globalize will always create no translation
+    assert (not u.translated_locales.include?(:pl))
   end
 
   test "persisted translations can be set to empty values" do
