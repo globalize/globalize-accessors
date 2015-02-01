@@ -35,11 +35,25 @@ module Globalize::Accessors
   def define_setter(attr_name, locale)
     localized_attr_name = localized_attr_name_for(attr_name, locale)
 
+    define_method :"delete_translation_if_all_blank" do |locale|
+      should_delete = true
+      translated_attributes.keys.each do |key|
+        should_delete = translation_for(locale)[key].blank?
+        break if not should_delete
+      end
+      if should_delete
+        translations.where(:locale => locale).delete_all()
+        reload()
+      end
+    end
+
     define_method :"#{localized_attr_name}=" do |value|
       return if !translation_for(locale,false) && value.blank?
       write_attribute(attr_name, value, :locale => locale)
       translation_for(locale)[attr_name] = value
+      delete_translation_if_all_blank(locale)
     end
+
     if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
       attr_accessible :"#{localized_attr_name}"
     end
