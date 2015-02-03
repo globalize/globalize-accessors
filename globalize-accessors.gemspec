@@ -14,19 +14,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3"
   s.rubyforge_project         = "globalize-accessors"
 
-  if ENV['RAILS_3']
-    s.add_dependency "globalize", "~> 3.0.0"
-  elsif ENV['RAILS_4']
-    s.add_dependency "globalize", "~> 4.0.0.alpha.1"
-  else
-    s.add_dependency "globalize", ">= 3"
-  end
-
-  s.add_development_dependency "bundler", ">= 1.3.5"
+  s.add_dependency "globalize", "~> 5.0.0"
+  s.add_development_dependency "bundler", "~> 1.7.2"
   s.add_development_dependency "rake", "~> 0.9.2"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "minitest", "~> 4.2"
-
+  s.add_development_dependency "minitest", "~> 5.1"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
