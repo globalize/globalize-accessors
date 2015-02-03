@@ -22,12 +22,6 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     globalize_accessors :locales => [:de], :attributes => [:color]
   end
 
-  class UnitWithAttrAccessible < ActiveRecord::Base
-    self.table_name = :units
-    translates :name, :title
-    globalize_accessors
-  end
-
   class UnitWithDashedLocales < ActiveRecord::Base
     self.table_name = :units
     translates :name
