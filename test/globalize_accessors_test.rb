@@ -17,17 +17,9 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
   end
 
   class UnitInheritedWithOptions < ActiveRecord::Base
+    self.table_name = :units
     translates :color
     globalize_accessors :locales => [:de], :attributes => [:color]
-  end
-
-  if ENV['RAILS_3']
-    class UnitWithAttrAccessible < ActiveRecord::Base
-      self.table_name = :units
-      attr_accessible :name
-      translates :name, :title
-      globalize_accessors
-    end
   end
 
   class UnitWithDashedLocales < ActiveRecord::Base
@@ -158,18 +150,6 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
     assert_equal "Name en",  u.name
     assert_equal "Name pl",  u.name_pl
-  end
-
-  if ENV['RAILS_3']
-    test "whitelist locale accessors if the original attribute is whitelisted" do
-      u = UnitWithAttrAccessible.new()
-      u.update_attributes(:name => "Name en", :name_pl => "Name pl", :title => "Title en", :title_pl => "Title pl")
-
-      assert_equal "Name en",  u.name
-      assert_equal "Name pl",  u.name_pl
-      assert_nil  u.title
-      assert_nil  u.title_pl
-    end
   end
 
   test "globalize locales on class without locales specified in options" do
