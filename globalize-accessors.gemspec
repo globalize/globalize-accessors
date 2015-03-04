@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3"
   s.rubyforge_project         = "globalize-accessors"
 
-  s.add_dependency "globalize", "~> 5.1.0"
-  s.add_development_dependency "bundler", "~> 1.7.2"
-  s.add_development_dependency "rake", "~> 0.9.2"
+  s.add_dependency "globalize", [">= 5.0.0", "~> 5.0"]
+
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rake"
   s.add_development_dependency "minitest", "~> 5.1"
 
   s.files        = `git ls-files`.split("\n")
