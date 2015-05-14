@@ -61,34 +61,6 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal 0, u.translations.count # count from database
   end
 
-  test "doesn't build translations without values" do
-    u = Unit.new(:name_en => nil, :title_pl => " ")
-    assert_equal 0, u.translations.size
-  end
-
-  test "doesn't build translations without values even after saving" do
-    u = Unit.new(:name_en => nil, :title_pl => " ")
-    u.save
-
-    # On Rails 4, Globalize will always create an empty translation for
-    # the default locale
-    # On Rails 3, Globalize will never create a translation
-    assert u.translated_locales.exclude?(:pl)
-  end
-
-  test "persisted translations can be set to empty values" do
-    u = Unit.new(:name_en => "test")
-    u.save
-    u.name_en = ""
-    assert_equal "", u.translations.first.name
-  end
-
-  test "not persisted translations can be set to empty values" do
-    u = Unit.new(:name_en => "test")
-    u.name_en = ""
-    assert_equal "", u.translations.first.name
-  end
-
   test "write on new object and read on saved" do
     u = Unit.create!(:name_en => "Name en", :title_pl => "Title pl")
 
