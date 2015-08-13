@@ -30,12 +30,28 @@ module Globalize::Accessors
     define_method localized_attr_name_for(attr_name, locale) do
       globalize.stash.contains?(locale, attr_name) ? globalize.send(:fetch_stash, locale, attr_name) : globalize.send(:fetch_attribute, locale, attr_name)
     end
+
+    define_method "#{localized_attr_name_for(attr_name, locale)}_was" do
+      self.attribute_was(localized_attr_name_for(attr_name, locale))
+    end
   end
 
   def define_setter(attr_name, locale)
     localized_attr_name = localized_attr_name_for(attr_name, locale)
 
     define_method :"#{localized_attr_name}=" do |value|
+      # custom dirty tracking to enable #{attr_name}_was, taken from globalize/rails
+      if attribute_changed?(localized_attr_name)
+        # If there's already a change, delete it if this undoes the change.
+        old = changed_attributes[localized_attr_name]
+        @changed_attributes.delete(localized_attr_name) if value == old
+      else
+        # If there's not a change yet, record it.
+        old = globalize.fetch(locale, attr_name)
+        old = old.dup if old.duplicable?
+        @changed_attributes[localized_attr_name] = old if value != old
+      end
+
       write_attribute(attr_name, value, :locale => locale)
       translation_for(locale)[attr_name] = value
     end

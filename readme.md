@@ -26,7 +26,7 @@ class Product
 end
 ````
 
-Gives you access to methods: `title_pl`, `title_en`, `title_pl=`, `title_en=`. These work seamlessly with Globalize (not even touching the "core" `title`, `title=` methods used by Globalize itself).
+Gives you access to methods: `title_pl`, `title_en`, `title_pl=`, `title_en=`, `title_en_was`, `title_pl_was`. These work seamlessly with Globalize (not even touching the "core" `title`, `title=` methods used by Globalize itself).
 
 The `:locales` and `:attributes` options are optional. Their default values are:
 

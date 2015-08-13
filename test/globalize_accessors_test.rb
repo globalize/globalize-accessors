@@ -51,6 +51,9 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     assert_equal "Name en",  u.name_en
     assert_equal "Title pl", u.title_pl
 
+    assert_equal nil, u.name_en_was
+    assert_equal nil, u.title_pl_was
+
     assert_nil u.name_pl
     assert_nil u.title_en
   end
@@ -98,6 +101,10 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
 
     u.name_pl = "Name pl"
     u.name_en = "Name en2"
+
+    assert_equal "Name en",   u.name_en_was
+    assert_equal nil,         u.name_pl_was
+
     u.save!
 
     assert_equal "Name en2",  u.name
