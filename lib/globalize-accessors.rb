@@ -36,6 +36,7 @@ module Globalize::Accessors
     localized_attr_name = localized_attr_name_for(attr_name, locale)
 
     define_method :"#{localized_attr_name}=" do |value|
+      attribute_will_change!(localized_attr_name) if value != send(localized_attr_name)
       write_attribute(attr_name, value, :locale => locale)
       translation_for(locale)[attr_name] = value
     end
