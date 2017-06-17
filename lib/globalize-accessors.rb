@@ -1,4 +1,5 @@
 require 'globalize'
+require 'globalize-confirmable'
 
 module Globalize::Accessors
   def globalize_accessors(options = {})
@@ -13,6 +14,9 @@ module Globalize::Accessors
     end
 
     include InstanceMethods
+
+    # Globalize::Confirmable additional methods
+    initialize_globalize_confirmable if options[:confirmable] == true
   end
 
   def localized_attr_name_for(attr_name, locale)
@@ -21,9 +25,33 @@ module Globalize::Accessors
 
   private
 
+  def initialize_globalize_confirmable
+    class_attribute :globalize_confirmable_enabled
+    self.globalize_confirmable_enabled = use_globalize_confirmable?
+
+    if globalize_confirmable_enabled
+      add_confirmable_class_methods
+      translated_attribute_names.each do |attr_name|
+        define_confirmable_instance_methods(attr_name)
+      end
+    end
+  end
+
+  def define_values(attr_name)
+    define_method :"#{attr_name}_values" do
+      vals = {}
+      globalize_locales.each do |locale|
+        vals[locale] = { value: send(localized_attr_name_for(attr_name, locale)) }
+        vals[locale][:confirmed] = send(:"#{attr_name}_confirmed?", locale) if globalize_confirmable_enabled
+      end
+      vals
+    end
+  end
+
   def define_accessors(attr_name, locale)
     define_getter(attr_name, locale)
     define_setter(attr_name, locale)
+    define_values(attr_name)
   end
 
   def define_getter(attr_name, locale)
