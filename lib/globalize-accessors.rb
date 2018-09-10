@@ -22,6 +22,7 @@ module Globalize::Accessors
   private
 
   def define_accessors(attr_name, locale)
+    attribute("#{attr_name}_#{locale}", ::ActiveRecord::Type::Value.new)
     define_getter(attr_name, locale)
     define_setter(attr_name, locale)
   end
