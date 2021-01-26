@@ -4,8 +4,11 @@ cache: bundler
 before_script:
   - "cp test/db/database.yml.travis test/db/database.yml"
 script: "bundle exec rake"
+gemfile:
+  - gemfiles/rails_5.2.gemfile
+  - gemfiles/rails_6.0.gemfile
+  - gemfiles/rails_6.1.gemfile
 rvm:
-  - 2.2
   - 2.5
   - 2.6
   - 2.7
