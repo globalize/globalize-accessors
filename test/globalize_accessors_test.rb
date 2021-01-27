@@ -192,7 +192,7 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     u = Unit.create!(:name_en => "Name en")
     u.name_en = "New name en"
     assert u.changed.include?("name_en")
-    assert ["Name en", "New name en"], u.changes["name_en"]
+    assert_equal ["Name en", "New name en"], u.changes["name_en"]
     u.save!
     assert ! u.changed.include?("name_en")
   end

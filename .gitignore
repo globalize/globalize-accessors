@@ -6,3 +6,5 @@ nbproject
 test/debug.log
 test/db/database.yml
 Gemfile.lock
+.ruby-version
+.ruby-gemset
