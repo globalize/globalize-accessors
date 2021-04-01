@@ -22,7 +22,7 @@ module Globalize::Accessors
   private
 
   def define_accessors(attr_name, locale)
-    attribute("#{attr_name}_#{locale}", ::ActiveRecord::Type::Value.new)
+    attribute("#{attr_name}_#{locale}", ::ActiveRecord::Type::Value.new) if ::ActiveRecord::VERSION::STRING >= "5.0"
     define_getter(attr_name, locale)
     define_setter(attr_name, locale)
   end
