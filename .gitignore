@@ -1,8 +1,0 @@
-pkg/*
-*.gem
-.bundle
-nbproject
-*.sqlite3
-test/debug.log
-test/db/database.yml
-Gemfile.lock
