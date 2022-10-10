@@ -32,6 +32,16 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     self.table_name = :units
   end
 
+  class UnitWithFallback < ActiveRecord::Base
+    self.table_name = :units
+    translates :name, :title, fallbacks_for_empty_translations: true
+    globalize_accessors
+
+    def globalize_fallbacks(locale)
+      locale == :pl ? [:pl, :en] : [:en, :pl]
+    end
+  end
+
   setup do
     assert_equal :en, I18n.locale
   end
@@ -196,4 +206,15 @@ class GlobalizeAccessorsTest < ActiveSupport::TestCase
     u.save!
     assert ! u.changed.include?("name_en")
   end
+
+  test "translated attribute with fallbacks_for_empty_translations should not change when accessors are assigned but not changed" do
+    attrs = {:name_en => "", :name_pl => "Name pl"} # name_en is empty in order to trigger fallback
+    u = UnitWithFallback.create!(attrs)
+    assert u.name == 'Name pl'
+    u = UnitWithFallback.find(u.id)
+    assert ! u.changed.include?("name")
+    u.assign_attributes(attrs)
+    assert ! u.changed.include?("name")
+  end
+
 end

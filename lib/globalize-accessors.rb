@@ -22,6 +22,9 @@ module Globalize::Accessors
   private
 
   def define_accessors(attr_name, locale)
+    if respond_to?(:attribute)
+      attribute localized_attr_name_for(attr_name, locale)
+    end
     define_getter(attr_name, locale)
     define_setter(attr_name, locale)
   end
@@ -34,11 +37,15 @@ module Globalize::Accessors
 
   def define_setter(attr_name, locale)
     localized_attr_name = localized_attr_name_for(attr_name, locale)
-
     define_method :"#{localized_attr_name}=" do |value|
-      attribute_will_change!(localized_attr_name) if value != send(localized_attr_name)
-      write_attribute(attr_name, value, :locale => locale)
-      translation_for(locale)[attr_name] = value
+      translation_for(locale)
+      if value != send(localized_attr_name)
+        super(value) # note: super is not defined if db/schema.rb is not loaded
+        attribute_will_change!(localized_attr_name)
+        write_attribute(attr_name, value, :locale => locale)
+        translation_for(locale)[attr_name] = value
+      end
+      value
     end
     if respond_to?(:accessible_attributes) && accessible_attributes.include?(attr_name)
       attr_accessible :"#{localized_attr_name}"
