@@ -61,4 +61,6 @@ module Globalize::Accessors
   end
 end
 
-ActiveRecord::Base.extend Globalize::Accessors
+ActiveSupport.on_load(:active_record) do
+  ActiveRecord::Base.extend Globalize::Accessors
+end
