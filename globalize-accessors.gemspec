@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3"
   s.rubyforge_project         = "globalize-accessors"
 
+  s.add_dependency 'activesupport', '>= 4.2'
   s.add_dependency "globalize", ">= 5.0.0"
 
   s.add_development_dependency "sqlite3"
