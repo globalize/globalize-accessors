@@ -1,3 +1,3 @@
-source 'https://rubygems.org'
+source "https://git.uneek.eu/geminabox"
 
 gemspec
